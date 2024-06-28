@@ -5,6 +5,8 @@ print("---- GAME RULE ----")
 print("1. 입력은 1~100까지의 숫자 중 하나만 입력이 가능합니다.")
 print("2. 게임을 포기 하시려면 END를 입력해 주시면 강제로 종료합니다.")
 print("-------------------")
+game_status = True
+game_total_count = None
 
 
 def check_choice():
@@ -29,6 +31,14 @@ def check_game():
     return game_count
 
 
-count = check_game()
-print(f"시도 횟수 : {count} 입니다.")
-#check_roof = input("다시 게임을 시작 하시겠 습니까?(y/n)")
+while game_status:
+    if game_total_count is not None:
+        print(f"게임 진행 중 가장 빠르게 맞춘 횟수는 {game_total_count} 입니다.")
+    count = check_game()
+    print(f"시도 횟수 : {count} 입니다.")
+    check_roof = input("다시 게임을 시작 하시겠 습니까?(y/n)")
+    if check_roof == "n" or check_roof == "N": game_status = False
+    if game_total_count is None:
+        game_total_count = count
+    elif game_total_count > count:
+        game_total_count = count
